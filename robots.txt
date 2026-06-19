@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://patelana86.github.io/official-home-aiyouxi-com-cn/sitemap.xml
