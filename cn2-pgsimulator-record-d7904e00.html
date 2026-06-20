@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>PG模拟器 · 常回来看看 · 信息卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f2f4f7;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2a3a;
+      line-height: 1.6;
+      padding: 2rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .page-wrapper {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* 主视觉卡片区 */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      padding: 2.8rem 2rem 2rem;
+      margin-bottom: 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: box-shadow 0.2s;
+      text-align: center;
+      position: relative;
+    }
+    .hero-card:hover {
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+    }
+    .hero-label {
+      display: inline-block;
+      background: #e8ebf0;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: #3e4b5b;
+      margin-bottom: 1.2rem;
+      border: 1px solid #dce0e6;
+    }
+    .hero-card h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0f1a2b;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+    .hero-card p {
+      font-size: 1.1rem;
+      color: #3c4a5c;
+      max-width: 600px;
+      margin: 0 auto 1.2rem;
+    }
+    .hero-note {
+      display: inline-block;
+      background: #f0f2f5;
+      border-radius: 60px;
+      padding: 0.25rem 1.2rem;
+      font-size: 0.8rem;
+      color: #48607a;
+      border: 1px solid #dfe5ec;
+    }
+
+    /* 通用卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 600px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .card-grid .full-width {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+      padding: 1.8rem 1.5rem 1.8rem;
+      border: 1px solid #e9ecf1;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .card:hover {
+      border-color: #d0d7e1;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #1a293c;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .card h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: #7a8ba3;
+      border-radius: 6px;
+      margin-right: 6px;
+      opacity: 0.5;
+    }
+    .card ul {
+      padding-left: 1.2rem;
+      list-style: none;
+    }
+    .card ul li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #2d3a4c;
+    }
+    .card ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: #7a8ba3;
+      font-weight: 700;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #334256;
+      margin-bottom: 0.4rem;
+    }
+
+    /* 自然链接段落 */
+    .link-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 2rem 1.8rem;
+      border: 1px solid #e3e8ef;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      margin-bottom: 1.6rem;
+    }
+    .link-card p {
+      font-size: 1rem;
+      color: #1e2d42;
+      margin-bottom: 0.6rem;
+      line-height: 1.7;
+    }
+    .link-card a {
+      color: #1d4d7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #b8c7db;
+      transition: border-bottom 0.15s, color 0.15s;
+    }
+    .link-card a:hover {
+      color: #0a2e4e;
+      border-bottom: 1px solid #0a2e4e;
+    }
+
+    /* 小提示 / FAQ 卡片 */
+    .faq-card {
+      background: #f8faff;
+      border-radius: 24px;
+      padding: 1.8rem 1.8rem 1.6rem;
+      border: 1px solid #dce5ef;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.02);
+      margin-bottom: 1.6rem;
+    }
+    .faq-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1d2c41;
+      letter-spacing: 0.02em;
+    }
+    .faq-item {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+    .faq-item:last-child {
+      margin-bottom: 0;
+    }
+    .faq-q {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1f3349;
+      min-width: 4.2rem;
+      background: #eef2f7;
+      padding: 0.15rem 0.7rem;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .faq-a {
+      font-size: 0.9rem;
+      color: #2e4158;
+      line-height: 1.5;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #6a7a8e;
+      margin-top: 1.8rem;
+      padding-top: 1rem;
+      border-top: 1px solid #dce2ea;
+      letter-spacing: 0.3px;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 480px) {
+      body { padding: 1.2rem 0.8rem; }
+      .hero-card h1 { font-size: 2rem; }
+      .hero-card { padding: 2rem 1rem; }
+      .card { padding: 1.4rem 1rem; }
+      .link-card { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- 主视觉 -->
+  <div class="hero-card">
+    <div class="hero-label">📌 常回收藏夹</div>
+    <h1>PG模拟器</h1>
+    <p>将熟悉的工具放在顺手的位置，<br>让测试与调试更从容。</p>
+    <div class="hero-note">🔖 给自己一个明确的入口</div>
+  </div>
+
+  <!-- 用途卡片 + 人群卡片 两列 -->
+  <div class="card-grid">
+    <!-- 用途卡片 -->
+    <div class="card">
+      <h2>用途摘要</h2>
+      <ul>
+        <li>在浏览器中快速运行 PG 流程</li>
+        <li>验证配置与函数行为</li>
+        <li>对比不同版本的表现差异</li>
+        <li>保存常用查询片段</li>
+      </ul>
+    </div>
+    <!-- 适合人群卡片 -->
+    <div class="card">
+      <h2>适合人群</h2>
+      <ul>
+        <li>日常使用数据库的开发人员</li>
+        <li>需要快速测试 SQL 的分析师</li>
+        <li>教学与学习场景中的学生</li>
+        <li>喜欢在本地环境之外保留一个轻量沙箱的爱好者</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 自然链接段落：再次访问 / 收藏提示 -->
+  <div class="link-card">
+    <p>
+      如果你已经使用过 <a href="https://cn2-pgsimulator.com">PG模拟器</a>，
+      就会知道它作为一个随时可用的环境有多方便。把链接保存到书签或固定标签页，
+      下次需要测试某个函数或快速验证想法时，不用再重新搜索入口。
+    </p>
+    <p>
+      这也是为什么很多用户会选择把 <a href="https://cn2-pgsimulator.com">PG模拟器</a>
+      放在浏览器收藏栏的固定位置——少一步寻找，多一分专注。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要卡片 -->
+  <div class="faq-card">
+    <h3>❓ 常见小回顾</h3>
+    <div class="faq-item">
+      <span class="faq-q">模拟器</span>
+      <span class="faq-a">用于临时执行 PostgreSQL 语句，不保存持久数据，适合快速验证语法或逻辑。</span>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">收藏</span>
+      <span class="faq-a">建议使用浏览器书签或新建标签页分组，将 <a href="https://cn2-pgsimulator.com" style="border:none; background: none; padding:0; color:#1d4d7a; font-weight:500; border-bottom:1px dotted #b8c7db;">PG模拟器</a> 保留在显眼位置。</span>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">更新</span>
+      <span class="faq-a">环境会跟随社区版本进行更新，偶尔回来看看会发现一些细节改进。</span>
+    </div>
+  </div>
+
+  <!-- 额外卡片：使用节奏 -->
+  <div class="card" style="margin-bottom: 1.6rem;">
+    <h2>⏳ 保持连接的几个理由</h2>
+    <p style="margin-bottom:0.5rem;">不需要每天都打开，但当你需要时它就在那里：</p>
+    <ul>
+      <li>临时调试同事给的 SQL 片段</li>
+      <li>验证文档中的示例是否仍有效</li>
+      <li>在干净的环境里测试扩展或数据类型</li>
+    </ul>
+  </div>
+
+  <!-- 底部占位提示 -->
+  <div class="footer-note">
+    —— 记住一个地址，少绕一段弯路 ——
+  </div>
+
+</div>
+</body>
+</html>
