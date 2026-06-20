@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>满冠体育 · 知识库入口</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f5f0;
+            color: #2e2a25;
+            font-family: system-ui, -apple-system, 'Noto Serif SC', 'Georgia', serif;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+        }
+        /* 目录感布局 —— 借由卡片与分隔线 */
+        .hero {
+            border-bottom: 1px solid #d9d1c6;
+            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 450;
+            letter-spacing: 0.02em;
+            color: #1f1b16;
+            margin-bottom: 0.4rem;
+        }
+        .hero .sub {
+            font-size: 1rem;
+            color: #6b6258;
+            border-left: 3px solid #b3a492;
+            padding-left: 1rem;
+            margin-top: 0.2rem;
+        }
+        /* 卡片式区域 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .section-card {
+            background: rgba(255, 251, 245, 0.65);
+            border: 1px solid #e4dbd0;
+            border-radius: 12px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .section-card h2 {
+            font-size: 1.5rem;
+            font-weight: 420;
+            margin-bottom: 1.2rem;
+            color: #2f291f;
+            border-bottom: 1px dashed #d0c5b7;
+            padding-bottom: 0.6rem;
+        }
+        .section-card p, .section-card li {
+            margin-bottom: 0.7rem;
+        }
+        ul.clean-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul.clean-list li {
+            padding: 0.35rem 0 0.35rem 1.3rem;
+            position: relative;
+        }
+        ul.clean-list li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #ab9b89;
+            font-weight: bold;
+        }
+        /* 引用块 / 提示框 */
+        .callout {
+            background: #ede9e1;
+            border-left: 5px solid #b3a086;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0 0.5rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: #3e372e;
+        }
+        .callout strong {
+            color: #2f291f;
+        }
+        .tip-box {
+            background: #f2ede5;
+            border-radius: 10px;
+            padding: 1.4rem 1.6rem;
+            margin: 1.2rem 0 0.2rem;
+            border: 1px solid #dbd0c2;
+        }
+        .tip-box .tip-label {
+            display: inline-block;
+            background: #c2b5a3;
+            color: #fefbf7;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 0.1rem 0.75rem;
+            border-radius: 30px;
+            margin-bottom: 0.6rem;
+        }
+        /* 相关信息区 */
+        .rel-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.6rem;
+            padding: 0.2rem 0;
+        }
+        .rel-links a {
+            color: #5b4c3a;
+            text-decoration: none;
+            border-bottom: 1px dotted #c2b5a3;
+            transition: border 0.15s;
+        }
+        .rel-links a:hover {
+            border-bottom: 1px solid #5b4c3a;
+        }
+        .faq-summary {
+            margin-top: 0.5rem;
+        }
+        .faq-summary dt {
+            font-weight: 500;
+            margin: 1rem 0 0.2rem;
+            color: #3d352b;
+        }
+        .faq-summary dd {
+            padding-left: 0.5rem;
+            color: #5b5043;
+        }
+        .inline-link {
+            color: #5b4c3a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #b3a492;
+        }
+        .inline-link:hover {
+            color: #2f291f;
+            text-decoration-color: #2f291f;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e0d7cb;
+            margin: 1.8rem 0 1rem;
+        }
+        .footer-note {
+            font-size: 0.85rem;
+            color: #7d7265;
+            text-align: center;
+            margin-top: 2.8rem;
+            border-top: 1px solid #e0d7cb;
+            padding-top: 2rem;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 0.9rem; }
+            .section-card { padding: 1.2rem 1.2rem; }
+            .hero h1 { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero / 标题区 -->
+    <div class="hero">
+        <h1>满冠体育 · 知识库</h1>
+        <div class="sub">从赛事数据到运动常识 · 一个主题展开的入口</div>
+    </div>
+
+    <!-- 卡片网格：目录感布局 -->
+    <div class="card-grid">
+
+        <!-- 背景介绍区 -->
+        <div class="section-card">
+            <h2>从关键词到内容脉络</h2>
+            <p>「满冠体育」这个名称天然带有一股完整与积累的意味——它不是单一赛事或瞬间，而更像是围绕体育信息、赛事记录与运动知识所构成的持续体系。当我们把目光投向它背后，会发现体育不只是比分与胜负，更涉及训练方法、规则演变、装备演变以及不同人群的参与方式。</p>
+            <p>因此，这个知识库并不试图追逐热点，而是希望将零散的内容整理成可查阅、可延伸的条目。无论是职业比赛的技术统计，还是日常锻炼的注意事项，都可以在相对克制的叙述中找到位置。</p>
+        </div>
+
+        <!-- 特点 / 内容侧重 -->
+        <div class="section-card">
+            <h2>内容侧重与整理方式</h2>
+            <ul class="clean-list">
+                <li><strong>赛事与数据</strong> — 对主要职业联赛、杯赛的结构性梳理，以及常用统计指标的解释，不渲染预测，只陈述规则与常见记录。</li>
+                <li><strong>运动项目基础</strong> — 田径、球类、水上、格斗等项目的简要沿革与基础规则，适合初阶读者建立框架。</li>
+                <li><strong>训练与恢复</strong> — 关于体能训练、拉伸、营养补给的一般性介绍，不含个人化医疗建议。</li>
+                <li><strong>装备与场地</strong> — 常见运动器材的标准、场地尺寸及基本维护常识，聚焦客观信息。</li>
+            </ul>
+            <div class="callout">
+                <strong>一点说明</strong> · 所有内容均来自公开资料与运动科学通识，不涉及未经验证的数据或个案效果。
+            </div>
+        </div>
+
+        <!-- 场景与使用提示 -->
+        <div class="section-card">
+            <h2>使用场景与提示</h2>
+            <p>这个页面更适合当作一个起点——当你偶然想起某个运动术语、某条规则细节，或是想了解某项训练的背景时，可以试着从这里开始。体育知识往往彼此相连：比如了解足球越位规则，也可能连带触及比赛阵型的历史调整；知道马拉松的距离起源，又会牵涉到早期奥运会的项目设定。</p>
+
+            <div class="tip-box">
+                <span class="tip-label">浏览建议</span>
+                <p style="margin-bottom:0;">如果带着具体问题来，建议先查看相关主题的概述；如果只是随意翻看，不妨从自己最熟悉的项目开始，再慢慢向外延伸。知识库的索引功能会随着条目增加逐渐完善。</p>
+            </div>
+        </div>
+
+        <!-- 相关信息区 + FAQ 摘要 -->
+        <div class="section-card">
+            <h2>相关信息 · 常见疑问摘要</h2>
+            <dl class="faq-summary">
+                <dt>这里的内容会频繁更新吗？</dt>
+                <dd>更新节奏以稳定为主，重大规则变动或赛季更替时会做对应修订，日常以补充条目和校正细节为主。</dd>
+                <dt>能否在别处引用这里的资料？</dt>
+                <dd>可以，但建议先核对原始出处。本知识库尽量标注来源，部分综合条目属二次整理，引用时请自行判断。</dd>
+                <dt>是否有社区或讨论板块？</dt>
+                <dd>目前没有开放讨论区，但你可以通过相关页面找到联络方式，或直接查阅 <a href="https://webs-mgsport.com" class="inline-link">满冠体育</a> 网站上的更多栏目。</dd>
+            </dl>
+            <hr>
+            <div class="rel-links">
+                <span style="color:#5b5043; font-weight:400;">你可能想了解：</span>
+                <a href="https://webs-mgsport.com" class="inline-link">满冠体育</a>
+                <!-- 以下为占位示意，不添加真实链接，仅体现目录感 -->
+                <span style="color:#8a7e6f; border-bottom:1px dotted #cfc4b5;">运动基础条目</span>
+                <span style="color:#8a7e6f; border-bottom:1px dotted #cfc4b5;">赛季档案</span>
+                <span style="color:#8a7e6f; border-bottom:1px dotted #cfc4b5;">恢复指南</span>
+            </div>
+            <p style="font-size:0.9rem; margin-top:1.2rem; color:#5b5043;">以上关联方向将持续扩充，实际内容以网站内发布为准。</p>
+        </div>
+
+    </div><!-- /card-grid -->
+
+    <!-- 结尾，自然再次嵌入链接 -->
+    <div class="footer-note">
+        <p style="margin-bottom:0.4rem;">知识库内容基于体育通识整理 · 具体数据请以官方记录为准</p>
+        <p>若想了解更多信息，可浏览 <a href="https://webs-mgsport.com" class="inline-link">满冠体育</a> 的各个版块。</p>
+    </div>
+
+</div><!-- /container -->
+</body>
+</html>
