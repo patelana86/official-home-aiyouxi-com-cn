@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG模拟器 · 知识库｜站点介绍与可信说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f2f4f6;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        /* 卡片通用设计 */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e2e8f0;
+            padding: 1.75rem 2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card + .card {
+            margin-top: 1.75rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #d1d9e6;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-header h2,
+        .card-header h3 {
+            font-weight: 600;
+            font-size: 1.3rem;
+            letter-spacing: 0.01em;
+            color: #0f172a;
+        }
+
+        .card-header .badge {
+            background: #e9edf3;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #334155;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            margin-left: 0.5rem;
+            border: 1px solid #cbd5e1;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.75rem;
+        }
+
+        @media (max-width: 680px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            body {
+                padding: 1.25rem 0.75rem;
+            }
+            .card {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        /* 英雄区 / 标题区 */
+        .hero {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0b1a2f;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero .subhead {
+            font-size: 1rem;
+            color: #4b5a6e;
+            border-left: 3px solid #94a3b8;
+            padding-left: 0.85rem;
+            margin-top: 0.15rem;
+        }
+
+        .hero .meta-tag {
+            display: inline-block;
+            background: #dce2ec;
+            border-radius: 40px;
+            padding: 0.15rem 1rem;
+            font-size: 0.75rem;
+            color: #1e2a3e;
+            margin-top: 0.6rem;
+            border: 1px solid #b6c4d6;
+        }
+
+        /* 说明段落 */
+        .intro-text {
+            margin-bottom: 0.65rem;
+            color: #1f2a3f;
+        }
+
+        .text-muted {
+            color: #5d6d82;
+            font-size: 0.95rem;
+        }
+
+        .inline-link {
+            color: #1f4f8a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #7b97be;
+            transition: border 0.15s;
+        }
+
+        .inline-link:hover {
+            border-bottom: 1px solid #1f4f8a;
+        }
+
+        .divider-light {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #dce2ec, transparent);
+        }
+
+        ul.feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0;
+        }
+
+        ul.feature-list li {
+            padding: 0.45rem 0 0.45rem 1.6rem;
+            position: relative;
+        }
+
+        ul.feature-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #527a9b;
+            font-weight: 600;
+        }
+
+        .faq-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 550;
+            color: #0b1f35;
+        }
+
+        .faq-a {
+            color: #3e4d61;
+            font-size: 0.95rem;
+            margin-top: 0.1rem;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            background: #f8f9fd;
+            padding: 0.9rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #e0e7f0;
+            margin-top: 0.5rem;
+        }
+
+        .info-grid span {
+            font-size: 0.85rem;
+            color: #31445b;
+        }
+
+        .info-grid .label {
+            font-weight: 500;
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #a2b9d1;
+            color: #1e3a5f;
+            font-size: 0.8rem;
+            padding: 0.15rem 1rem;
+            border-radius: 40px;
+            cursor: default;
+            transition: none;
+        }
+
+        footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #66788f;
+            border-top: 1px solid #d9e0ea;
+            padding-top: 1.5rem;
+        }
+
+        .badge-secondary {
+            background: #e9eef5;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #2b3d58;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 标题区 / 知识库入口 -->
+    <div class="hero">
+        <h1>📘 PG模拟器 · 知识库说明</h1>
+        <div class="subhead">站点导览 · 可信信息 · 使用场景</div>
+        <div class="meta-tag">基于公开信息整理 · 内容索引</div>
+    </div>
+
+    <!-- 第一行：介绍 + 站点说明 (并排卡片) -->
+    <div class="grid-2col">
+        <!-- 卡片：站点介绍与可信说明 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>🔍 站点介绍</h2>
+                <span class="badge">可信说明</span>
+            </div>
+            <p class="intro-text">
+                <strong>PG模拟器</strong> 是一个专注于模拟交互与功能演示的在线工具平台。本站点围绕 <a href="https://m-home-pgsimulator.com" class="inline-link">PG模拟器</a> 
+                提供功能介绍、使用指引与常见问题索引，帮助使用者快速了解其能力边界与适用场景。
+            </p>
+            <p class="text-muted">
+                所有说明均基于官方页面及通用技术文档整理，不包含未经核实的性能承诺或诱导性描述。建议使用者结合自身需求，在了解基础逻辑后合理使用。
+            </p>
+            <hr class="divider-light">
+            <div class="info-grid">
+                <span><span class="label">▸ 性质</span> 功能模拟 / 演示工具</span>
+                <span><span class="label">▸ 面向</span> 普通用户 &amp; 轻量测试</span>
+                <span><span class="label">▸ 访问</span> 浏览器直接运行</span>
+            </div>
+        </div>
+
+        <!-- 卡片：特点与入口 -->
+        <div class="card">
+            <div class="card-header">
+                <h3>⚙️ 特点与入口</h3>
+                <span class="badge">核心路径</span>
+            </div>
+            <ul class="feature-list">
+                <li>无需注册即可体验基础模拟流程</li>
+                <li>界面清晰，分区引导，降低学习成本</li>
+                <li>支持多场景参数调整与快速重置</li>
+                <li>数据仅在本地会话中处理，无持久存储</li>
+            </ul>
+            <div style="margin-top: 1.2rem; background: #f5f7fb; padding: 0.7rem 1rem; border-radius: 14px; border: 1px solid #e1e8f0;">
+                <span style="font-weight: 500;">🔗 直接使用 </span>
+                <span style="color: #354b66;">→ 通过 <a href="https://m-home-pgsimulator.com" class="inline-link">PG模拟器</a> 进入工具主页，所有模块均可在页面内直接操作。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 场景 & 提示区 (并排卡片) -->
+    <div class="grid-2col" style="margin-top: 0.25rem;">
+        <!-- 场景卡片 -->
+        <div class="card">
+            <div class="card-header">
+                <h3>📌 适用场景</h3>
+                <span class="badge">参考</span>
+            </div>
+            <p class="text-muted" style="margin-bottom: 0.5rem;">以下为典型使用方向，可根据实际需要选取：</p>
+            <ul class="feature-list" style="margin-top: 0;">
+                <li>快速验证模拟逻辑与参数响应</li>
+                <li>教学演示或功能原型展示</li>
+                <li>对比不同配置下的输出差异</li>
+                <li>非生产环境下的探索与学习</li>
+            </ul>
+            <div style="margin-top: 1rem; border-left: 3px solid #b7c9de; padding-left: 1rem; background: #f9fafc; border-radius: 0 8px 8px 0; padding: 0.5rem 1rem;">
+                <span style="font-size: 0.9rem; color: #2c415b;">💡 提示：模拟结果仅供参考，不构成决策依据。</span>
+            </div>
+        </div>
+
+        <!-- 提示 / 注意事项 -->
+        <div class="card">
+            <div class="card-header">
+                <h3>⚠️ 提示与说明</h3>
+                <span class="badge">注意</span>
+            </div>
+            <ul class="feature-list">
+                <li>模拟数据基于客户端计算，关闭页面即清除</li>
+                <li>建议使用现代浏览器（Chrome / Firefox / Edge）获得完整体验</li>
+                <li>若遇到功能异常，可尝试刷新页面或检查浏览器版本</li>
+                <li>本站点不收集任何个人身份信息</li>
+            </ul>
+            <div style="margin-top: 0.8rem; background: #f1f4fa; padding: 0.4rem 1rem; border-radius: 30px; display: inline-block; font-size: 0.8rem; border: 1px solid #d2dceb;">
+                🧩 版本迭代以 PG模拟器 页面实际展示为准
+            </div>
+        </div>
+    </div>
+
+    <!-- 相关信息区 / FAQ 摘要 -->
+    <div class="card" style="margin-top: 1.75rem;">
+        <div class="card-header">
+            <h2>❓ 相关信息 · 常见疑问摘要</h2>
+            <span class="badge">FAQ</span>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">▸ 模拟器是否需要下载额外插件？</div>
+            <div class="faq-a">不需要。基于网页技术构建，打开 <a href="https://m-home-pgsimulator.com" class="inline-link">PG模拟器</a> 即可直接使用，无需安装。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">▸ 模拟结果准确吗？</div>
+            <div class="faq-a">模拟逻辑遵循常见数学/统计模型，但受限于客户端性能与简化假设，结果仅作为趋势参考。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">▸ 是否支持移动端？</div>
+            <div class="faq-a">页面已做基础响应式适配，可在手机浏览器中访问，但大屏体验更佳。</div>
+        </div>
+        <div class="faq-item" style="border-bottom: none;">
+            <div class="faq-q">▸ 如何反馈问题或建议？</div>
+            <div class="faq-a">目前可通过页面内预留的联系方式（如有）或基于社区渠道沟通。本站仅作信息索引。</div>
+        </div>
+        <div style="margin-top: 0.8rem; text-align: right;">
+            <span class="btn-ghost">📄 更多内容 · 以官网为准</span>
+        </div>
+    </div>
+
+    <!-- 附加可信说明 / 知识库脚注 -->
+    <div class="card" style="background: #f9fafc; border-color: #dbe1ea; padding: 1rem 2rem;">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem;">
+            <span style="font-size: 0.9rem; color: #31465f;">🔐 可信说明：本介绍页仅汇总公开信息，不替代官方文档。决策前请自行核实。</span>
+            <span style="font-size: 0.75rem; background: #e2e9f2; padding: 0.2rem 1rem; border-radius: 30px; color: #1f3857;">v.知识库 · 2405</span>
+        </div>
+    </div>
+
+    <footer>
+        <span>基于 <a href="https://m-home-pgsimulator.com" class="inline-link">PG模拟器</a> 公开信息整理 · 内容索引页</span>
+        <span style="display: block; margin-top: 0.25rem; opacity: 0.7;">仅作为知识介绍与导航，不涉及商业推广</span>
+    </footer>
+
+</div>
+</body>
+</html>
